@@ -3,8 +3,6 @@ import { MultiError } from '@xrengine/client-core/src/util/errors'
 import { ProjectInterface } from '@xrengine/common/src/interfaces/ProjectInterface'
 import { SceneJson } from '@xrengine/common/src/interfaces/SceneInterface'
 import { AnimationManager } from '@xrengine/engine/src/avatar/AnimationManager'
-import { EngineActions } from '@xrengine/engine/src/ecs/classes/EngineState'
-import TransformGizmo from '@xrengine/engine/src/scene/classes/TransformGizmo'
 import { dispatchAction } from '@xrengine/hyperflux'
 
 import ErrorIcon from '../classes/ErrorIcon'
@@ -42,7 +40,7 @@ export async function runPreprojectLoadTasks(): Promise<void> {
   if (editorState.preprojectLoadTaskStatus.value === TaskStatus.NOT_STARTED) {
     dispatchAction(EditorAction.updatePreprojectLoadTask({ taskStatus: TaskStatus.IN_PROGRESS }))
 
-    await Promise.all([ErrorIcon.load(), TransformGizmo.load(), AnimationManager.instance.loadDefaultAnimations()])
+    await Promise.all([ErrorIcon.load(), AnimationManager.instance.loadDefaultAnimations()])
 
     dispatchAction(EditorAction.updatePreprojectLoadTask({ taskStatus: TaskStatus.COMPLETED }))
   }

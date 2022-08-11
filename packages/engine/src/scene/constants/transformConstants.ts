@@ -9,9 +9,9 @@ export const TransformMode = {
   Disabled: 'Disabled' as const,
   Grab: 'Grab' as const,
   Placement: 'Placement' as const,
-  Translate: 'Translate' as const,
-  Rotate: 'Rotate' as const,
-  Scale: 'Scale' as const
+  Translate: 'translate' as const,
+  Rotate: 'rotate' as const,
+  Scale: 'scale' as const
 }
 export const TransformAxis = {
   X: 'X' as const,

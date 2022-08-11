@@ -42,7 +42,7 @@ export const setTransformMode = (mode: TransformModeType): void => {
   }
 
   EditorHistory.grabCheckPoint = undefined
-  SceneState.transformGizmo.setTransformMode(mode)
+  SceneState.transformGizmo.mode = mode
   dispatchAction(EditorHelperAction.changedTransformMode({ mode }))
 }
 

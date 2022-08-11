@@ -18,7 +18,7 @@ import { World } from '@xrengine/engine/src/ecs/classes/World'
 import { defineQuery, getComponent } from '@xrengine/engine/src/ecs/functions/ComponentFunctions'
 import { getEntityNodeArrayFromEntities } from '@xrengine/engine/src/ecs/functions/EntityTreeFunctions'
 import InfiniteGridHelper from '@xrengine/engine/src/scene/classes/InfiniteGridHelper'
-import TransformGizmo from '@xrengine/engine/src/scene/classes/TransformGizmo'
+import { TransformControls } from '@xrengine/engine/src/scene/classes/TransformGizmo'
 import { Object3DComponent } from '@xrengine/engine/src/scene/components/Object3DComponent'
 import {
   SnapMode,
@@ -95,7 +95,7 @@ export default async function EditorControlSystem(_: World) {
   let selectedEntities: Entity[]
   let selectedParentEntities: Entity[]
   let selectionCounter: number = 0
-  let gizmoObj: TransformGizmo
+  let gizmoObj: TransformControls
   let transformMode: TransformModeType
   let transformPivot: TransformPivotType
   let transformSpace: TransformSpace
@@ -150,7 +150,7 @@ export default async function EditorControlSystem(_: World) {
 
       selectedParentEntities = selectionState.selectedParentEntities.value
       selectedEntities = selectionState.selectedEntities.value
-      gizmoObj = getComponent(SceneState.gizmoEntity, Object3DComponent)?.value as TransformGizmo
+      gizmoObj = getComponent(SceneState.gizmoEntity, Object3DComponent)?.value as TransformControls
 
       transformModeChanged = transformMode === editorHelperState.transformMode.value
       transformMode = editorHelperState.transformMode.value
@@ -444,7 +444,7 @@ export default async function EditorControlSystem(_: World) {
               executeCommandWithHistory({ type: EditorCommands.REPLACE_SELECTION, affectedNodes: [] })
             }
           }
-          SceneState.transformGizmo.deselectAxis()
+          SceneState.transformGizmo.axis = null!
           dragging = false
         }
       }

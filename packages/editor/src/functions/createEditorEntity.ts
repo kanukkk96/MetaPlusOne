@@ -29,7 +29,7 @@ export const createEditorEntity = (): Entity => {
     resetKeys: null!
   })
 
-  SceneState.transformGizmo.setTransformMode(TransformMode.Translate)
+  SceneState.transformGizmo.setMode(TransformMode.Translate)
 
   return entity
 }

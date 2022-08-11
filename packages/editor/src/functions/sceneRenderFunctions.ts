@@ -14,7 +14,7 @@ import {
 } from '@xrengine/engine/src/renderer/EngineRendererState'
 import { EngineRenderer } from '@xrengine/engine/src/renderer/WebGLRendererSystem'
 import InfiniteGridHelper from '@xrengine/engine/src/scene/classes/InfiniteGridHelper'
-import TransformGizmo from '@xrengine/engine/src/scene/classes/TransformGizmo'
+import { TransformControls } from '@xrengine/engine/src/scene/classes/TransformGizmo'
 import { ObjectLayers } from '@xrengine/engine/src/scene/constants/ObjectLayers'
 import { loadSceneFromJSON } from '@xrengine/engine/src/scene/functions/SceneLoading'
 import { dispatchAction } from '@xrengine/hyperflux'
@@ -40,7 +40,7 @@ export const DefaultExportOptions: DefaultExportOptionsType = {
 
 type SceneStateType = {
   isInitialized: boolean
-  transformGizmo: TransformGizmo
+  transformGizmo: TransformControls
   gizmoEntity: Entity
   editorEntity: Entity
   onUpdateStats?: (info: WebGLInfo) => void
@@ -79,7 +79,10 @@ export async function initializeScene(projectFile: SceneJson): Promise<Error[] |
     focusedObjects: []
   })
 
-  SceneState.transformGizmo = new TransformGizmo()
+  SceneState.transformGizmo = new TransformControls(
+    Engine.instance.currentWorld.camera,
+    EngineRenderer.instance.renderer.domElement
+  )
 
   SceneState.gizmoEntity = createGizmoEntity(SceneState.transformGizmo)
   SceneState.editorEntity = createEditorEntity()
