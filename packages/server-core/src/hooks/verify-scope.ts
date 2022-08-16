@@ -25,10 +25,17 @@ export default (currentType: string, scopeToVerify: string) => {
       return result
     }, [])
     if (!currentScopes.includes(scopeToVerify)) {
-
       if (scopeToVerify === 'admin') throw new UnauthorizedException('Must be admin to perform this action')
       else {
-        console.log('scope not found, and not admin', currentScopes, currentType, scopeToVerify, context.method, context.path, context)
+        console.log(
+          'scope not found, and not admin',
+          currentScopes,
+          currentType,
+          scopeToVerify,
+          context.method,
+          context.path,
+          context
+        )
         throw new UnauthorizedException(`Unauthorised ${scopeToVerify} action on ${currentType}`)
       }
     }
