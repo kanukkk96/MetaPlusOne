@@ -7,6 +7,7 @@ import { Application } from './../../declarations'
 
 export default (currentType: string, scopeToVerify: string) => {
   return async (context: HookContext<Application>) => {
+    console.log('verify-scope', context.params)
     if (context.params.isInternal) return context
     const loggedInUser = context.params.user as UserInterface
     if (!loggedInUser) throw new UnauthenticatedException('No logged in user')

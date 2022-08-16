@@ -137,13 +137,17 @@ describe('verify-scope', () => {
 
     // cleanup
     await app.service('user').remove(user.id!)
+    console.log('verify admin complete')
   })
 
   it('should verify if isInternal', () => {
+    console.log('verify if isInternal')
     const verifyLocationReadScope = verifyScope('location', 'read')
     const hookContext = mockUserHookContext(null!, app)
     hookContext.params.isInternal = true
 
+    console.log('verifying location read scope with isInternal')
     assert.doesNotThrow(() => verifyLocationReadScope(hookContext))
+    console.log('verify isInteral complete')
   })
 })
